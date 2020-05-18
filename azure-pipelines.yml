@@ -18,7 +18,16 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: '- task: ArtifactoryDocker@1
+  inputs:
+    command: 'push'
+    artifactoryService: 'Lakshmiart'
+    targetRepo: 'docker-pavan-local'
+    imageName: 'laksmip-docker-pavan.jfrog.io/ubuntu-latest'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true'
     steps:
     - task: Docker@2
       displayName: Build an image
