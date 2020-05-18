@@ -28,4 +28,13 @@ stages:
         tags: |
           $(tag)
 
-  
+    - task: ArtifactoryDocker@1
+      inputs:
+       command: 'push'
+       artifactoryService: 'Lakshmiart'
+       targetRepo: 'docker-pavan'
+       imageName: 'laksmip-docker-pavan.jfrog.io/ubuntu-latest'
+       collectBuildInfo: true
+       buildName: '$(Build.DefinitionName)'
+       buildNumber: '$(Build.BuildNumber)'
+       includeEnvVars: true
